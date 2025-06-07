@@ -1,7 +1,7 @@
 let express=require('express')
 let app=express()
 let cors=require('cors')
-let {router}=require('./api/api1')
+// let {router}=require('./api/api1')
 // let {MongoClient}=require('mongodb')
 // let url='mongodb://localhost:27017'
 // let mongocli=new MongoClient(url)
@@ -9,9 +9,15 @@ let {router}=require('./api/api1')
 app.use(express.json())
 app.use(cors())
 
-app.use('/auth',router)
-
+// app.use('/auth',router)
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from Express!" });
+});
 app.listen(2030,()=>console.log('server started   on 2030............'))
+
+// Export as Vercel handler
+module.exports = app;
+
 // let dbname='login'
 // let colname='user'
 //database informations
