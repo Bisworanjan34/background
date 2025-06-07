@@ -1,38 +1,22 @@
-let express=require('express')
-let app=express()
-let cors=require('cors')
-// let {router}=require('./api/api1')
-// let {MongoClient}=require('mongodb')
-// let url='mongodb://localhost:27017'
-// let mongocli=new MongoClient(url)
-
-app.use(express.json())
-app.use(cors())
-
-// app.use('/auth',router)
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Express!" });
+let express = require('express');
+let app = express();
+let corse= require('cors');
+let mongoose = require('mongoose');
+let bodyParser = require('body-parser');
+const router = require('./route');
+mongoose.connect('mongodb://localhost:27017/mern', {
+    useNewUrlParser: true,  
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connected to MongoDB");
+}).catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
 });
-app.listen(2030,()=>console.log('server started   on 2030............'))
+app.use(corse());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use('/auth',router); // Adjust the path as necessary
 
-// Export as Vercel handler
-module.exports = app;
-
-// let dbname='login'
-// let colname='user'
-//database informations
-// let mongo=require('./api/api1')
-// let {getfun}=mongo
-// let mongop=require('./api/api2')
-// let {postfun}=mongop
-
-// let mongod=require('./api/api3')
-// let {deletefun}=mongod
-
-// mongocli.connect()
-//api calll
-// getfun(app,dbname,colname,mongocli)
-// postfun(app,dbname,colname,mongocli)
-// deletefun(app,dbname,colname,mongocli)
-
-
+app.listen(2030, () => {
+    console.log("Server is running on port 2030");
+});
