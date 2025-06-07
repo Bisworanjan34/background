@@ -5,7 +5,7 @@ let corse= require('cors');
 let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
 const router = require('./route');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const mongoUrl = process.env.mongo_url;
 
 mongoose.connect(mongoUrl)
